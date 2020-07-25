@@ -2,16 +2,16 @@
     'use strict';
     var toolbar = document.querySelector("#markItUpId_body > div > div.markItUpHeader > ul")
 
-    var uploadButton = document.createElement('input')
+    var uploadInput = document.createElement('input')
 
     var textBox = document.querySelector("#id_body")
 
-    uploadButton.type = 'file'
+    uploadInput.type = 'file'
 
-    uploadButton.accept = 'image/*'
+    uploadInput.accept = 'image/*'
 
-    uploadButton.addEventListener('change', e=>{
-        var file = uploadButton.files[0]
+    uploadInput.addEventListener('change', e=>{
+        var file = uploadInput.files[0]
 
         var reader = new FileReader()
 
@@ -21,10 +21,16 @@
             uploadImage(reader.result)
         }
     })
+    
+    uploadInput.style.display="none"
 
     if(toolbar && textBox){
-        toolbar.appendChild(uploadButton)
-
+        document.body.appendChild(uploadInput)
+        document.querySelector(".markItUpButton5").insertAdjacentHTML("afterend",`<li class="markItUpButton markItUpButton17"><a id="uploadButton" href="javascript:;" title="Upload Image" style="background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABVUlEQVQ4jc3SO0tCYRzH8WcOegNtTb2BXkO1SNBuFyJqC1uihhqCNCIH8xKU8BzzcspQEskWC8IWcRCji8WxEnrSCKqh+dvQRTwcybZ+8J3+8Jn+QvyL2byHfDe9c7r/d8CdJlB5JVB5xeZOt10DcKV+gHazuVINQNi9iIUDizJfWdzsXhOQrDeXqOEz3vllvtbAngIgm822DKABJB6b27n/AeZST8zEqyylr4jmT3DsVi0A/a45rQxAOByme+2BzuUbRpOb3L4MIBbLSClNwHa5ua0SALFYDOeZTn/mnI6goke/pmvbsACCpUb+AsJfACASiTB1tULwfZF15Wb+eRDn27gFsHqE2Mh/5skhPDkANE2j/3iWseIkExcOhorD9F32moBh/4iwezEHIKVEKUWtVsMwDOr1OkopE9Bi34CUklAohK7rxONxotEomqa1Bfh++6QPwtgXjMvZERUAAAAASUVORK5CYII=');">Upload</a></li>`)
+        document.querySelector("#uploadButton").onmousedown=e=>{
+            e.preventDefault()
+            uploadInput.click()
+        }
         textBox.addEventListener('paste', e=>{
             retrieveImageFromClipboardAsBlob(e,function(imageBlob){
                 if(imageBlob){
