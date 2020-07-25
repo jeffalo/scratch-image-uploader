@@ -38,6 +38,19 @@
                 }
             })
         })
+
+        textBox.addEventListener('drop', e=>{
+            e.preventDefault()
+            e.stopPropagation()
+
+            var reader = new FileReader()
+
+            reader.readAsArrayBuffer(e.dataTransfer.files[0])
+            //console.log(e.dataTransfer)
+            reader.onloadend = function () {
+                uploadImage(reader.result)
+            }
+        })
     }
 
     function retrieveImageFromClipboardAsBlob(pasteEvent, callback){
