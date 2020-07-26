@@ -1,8 +1,8 @@
 (function() {
     'use strict';
-    var toolbar = document.querySelector("#markItUpId_body > div > div.markItUpHeader > ul")
+    var toolbar = document.querySelector("#markItUpId_body > div > div.markItUpHeader > ul") || document.querySelector("#markItUpId_signature > div > div.markItUpHeader > ul")
 
-    var textBox = document.querySelector("#id_body")
+    var textBox = document.querySelector("#id_body") || document.querySelector("#id_signature")
 
     var uploadInput = document.createElement('input')
 
