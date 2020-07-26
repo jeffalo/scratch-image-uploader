@@ -3,8 +3,8 @@ a chrome(ium) extension which allows image uploading directly through scratch
 ## 💾 Installation
 [get it from the chrome webstore](https://chrome.google.com/webstore/detail/scratch-image-uploader/ofjfkbdgogigeclofnlgpbimaaohkjoo) or [install it using chrome's built in development mode for extensions](https://developer.chrome.com/extensions/getstarted)
 
-## 📜 usage as a userscript
-while not officially supported, you can also use it as a userscript and it should work fine.
+## 📜 Usage as a userscript
+while not officially supported, you can also use it as a userscript and it should work fine. the browser extension is recommended though. only use this if you can't install browser extensions or you use a browser which is not yet supported. 
 
 ```js
 // ==UserScript==
