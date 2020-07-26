@@ -6,11 +6,14 @@ a chrome(ium) extension which allows image uploading directly through scratch
 ## 📜 Usage as a userscript
 while not officially supported (there might be random issues), you can also use it as a userscript and it should work fine. until a better solution for firefox support is done, this is the only way to use it on firefox.
 
+[click here to install userscript](https://gist.github.com/JeffaloBob/9ad73b0728863f85832bb6703b6b7875/raw/scratch-image-uploader.user.js)
+
 ```js
 // ==UserScript==
 // @name         Scratch Image Uploader
 // @namespace    https://jeffalo.net/
-// @version      1.0
+// @version      0.0.3
+// @updateURL    https://gist.github.com/JeffaloBob/9ad73b0728863f85832bb6703b6b7875/raw/scratch-image-uploader.user.js
 // @description  Use Scratch project thumbnails to upload images to be used on the forums.
 // @author       Jeffalo
 // @icon         https://raw.githubusercontent.com/JeffaloBob/scratch-image-uploader/master/images/logo_1000.png
