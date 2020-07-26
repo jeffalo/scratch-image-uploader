@@ -101,7 +101,13 @@
 
         console.log(image);
 
+        window.progresselement = toolbar.appendChild(document.createElement("li"));
+        progresselement.innerHTML = "getting authorization";
+
         (k=>fetch("/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
+            
+            progresselement.innerHTML = "creating project";
+            
             fetch("https://projects.scratch.mit.edu/", {
                 "headers": {
                     "accept": "*/*",
@@ -120,6 +126,8 @@
             }).then(e=>e.json())
                 .then(data=>{
                 console.log(data)
+
+                progresselement.innerHTML = "setting title";
 
                 //set title
                 console.log(data["content-name"])
@@ -141,6 +149,9 @@
                     "credentials": "omit"
                 }).then(thing=>{
                     console.log('changed title')
+
+                    progresselement.innerHTML = "setting thumbnail";
+
                     $.ajax({ //CREDIT TO WORLD LANGUAGES FOR THIS THING
                         type: "POST",
                         url: "/internalapi/project/thumbnail/" + data["content-name"] + "/set/",
@@ -151,13 +162,11 @@
                         contentType: "",
                         processData: false,
                         xhr: function() {
-                            window.progresselement = toolbar.appendChild(document.createElement("li"));
-                            progresselement.innerHTML = "Uploading... 0%";
                             var xhr = $.ajaxSettings.xhr();
                             xhr.upload.onprogress = function(e) {
                                 if(true){
                                     var progress = Math.floor(e.loaded / e.total *100) + '%';
-                                    progresselement.innerHTML = `Uploading... ${progress}`;
+                                    progresselement.innerHTML = `uploading thumbnail... ${progress}`;
                                 }
                             };
                             return xhr;
