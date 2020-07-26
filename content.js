@@ -16,6 +16,8 @@
         var reader = new FileReader()
 
         reader.readAsArrayBuffer(file)
+        window.progresselement = toolbar.appendChild(document.createElement("li"));
+        progresselement.innerHTML = "Reading file...";
 
         reader.onloadend = function () {
             uploadImage(reader.result)
@@ -100,6 +102,7 @@
         var randomId = makeid(5)
 
         console.log(image);
+        progresselement.innerHTML = "Creating project...";
 
         (k=>fetch("/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
             fetch("https://projects.scratch.mit.edu/", {
@@ -123,6 +126,7 @@
 
                 //set title
                 console.log(data["content-name"])
+                progresselement.innerHTML = "Naming project...";
                 fetch("https://api.scratch.mit.edu/projects/"+data["content-name"], {
                     "headers": {
                         "accept": "application/json",
@@ -151,22 +155,21 @@
                         contentType: "",
                         processData: false,
                         xhr: function() {
-                            window.progresselement = toolbar.appendChild(document.createElement("li"));
-                            progresselement.innerHTML = "Uploading... 0%";
+                            progresselement.innerHTML = "Uploading thumbnail... 0%";
                             var xhr = $.ajaxSettings.xhr();
                             xhr.upload.onprogress = function(e) {
                                 if(true){
                                     var progress = Math.floor(e.loaded / e.total *100) + '%';
-                                    progresselement.innerHTML = `Uploading... ${progress}`;
+                                    progresselement.innerHTML = `Uploading thumbnail... ${progress}`;
                                 }
                             };
                             return xhr;
                         },
                         error: function() {
                             textFieldEdit.insert(textBox,`your image could not be added. perhaps try a smaller one. here is a cat. [img]https://cdn2.scratch.mit.edu/get_image/project/413649276_9000x7200.png[/img]`);
-                            try{progresselement.remove()}catch{};
                             
                             //delete the project anyways
+                            progresselement.innerHTML = "Moving project to trash...";
                             fetch(`https://scratch.mit.edu/site-api/projects/all/${data["content-name"]}/`, {
                                 "headers": {
                                     "accept": "application/json, text/javascript, */*; q=0.01",
@@ -186,13 +189,14 @@
                                 "credentials": "include"
                             }).then(asdf=>{
                                 console.log('deleted project')
+                                progresselement.remove()
                             })
                         
                         },
                         success: function(msg) {
                             console.log('set thumbnail')
                             textFieldEdit.insert(textBox,`[img]https://cdn2.scratch.mit.edu/get_image/project/${data["content-name"]}_9000x7200.png[/img]`)
-                            try{progresselement.remove()}catch{};
+                            progresselement.innerHTML = "Moving project to trash...";
 
                             fetch(`https://scratch.mit.edu/site-api/projects/all/${data["content-name"]}/`, {
                                 "headers": {
@@ -213,6 +217,7 @@
                                 "credentials": "include"
                             }).then(asdf=>{
                                 console.log('deleted project')
+                                progresselement.remove()
                             })
                         },
                     });
