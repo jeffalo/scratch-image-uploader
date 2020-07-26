@@ -5,6 +5,8 @@
     var uploadInput = document.createElement('input')
 
     var textBox = document.querySelector("#id_body")
+    
+    var progresselement;
 
     uploadInput.type = 'file'
 
@@ -16,7 +18,7 @@
         var reader = new FileReader()
 
         reader.readAsArrayBuffer(file)
-        window.progresselement = toolbar.appendChild(document.createElement("li"));
+        progresselement = toolbar.appendChild(document.createElement("li"));
         progresselement.innerHTML = "Reading file...";
 
         reader.onloadend = function () {
