@@ -125,7 +125,7 @@
         window.progresselement = toolbar.appendChild(document.createElement("li"));
         progresselement.innerHTML = "getting authorization";
 
-        (k=>fetch("/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}}).catch(err=>{displayError("could not get authorization. are you signed in?");progresselement.remove();throw err;})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
+        (k=>fetch("https://scratch.mit.edu/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}}).catch(err=>{displayError("could not get authorization. are you signed in?");progresselement.remove();throw err;})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
             
             progresselement.innerHTML = "creating project";
             
