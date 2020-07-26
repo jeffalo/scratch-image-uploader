@@ -139,17 +139,20 @@
                         contentType: "",
                         processData: false,
                         xhr: function() {
+                            window.progresselement = toolbar.appendChild(document.createElement("li"));
+                            progresselement.innerHTML = "Uploading... 0%";
                             var xhr = $.ajaxSettings.xhr();
                             xhr.upload.onprogress = function(e) {
                                 if(true){
                                     var progress = Math.floor(e.loaded / e.total *100) + '%';
-                                    //document.getElementById("snackbar").innerHTML = "Uploading file " + progress;
+                                    progresselement.innerHTML = `Uploading... ${progress}`;
                                 }
                             };
                             return xhr;
                         },
                         error: function() {
-                            textFieldEdit.insert(textBox,`your image could not be added. perhaps try a smaller one. here is a cat. [img]https://cdn2.scratch.mit.edu/get_image/project/413649276_9000x7200.png[/img]`)
+                            textFieldEdit.insert(textBox,`your image could not be added. perhaps try a smaller one. here is a cat. [img]https://cdn2.scratch.mit.edu/get_image/project/413649276_9000x7200.png[/img]`);
+                            try{progresselement.remove()}catch{};
                             
                             //delete the project anyways
                             fetch(`https://scratch.mit.edu/site-api/projects/all/${data["content-name"]}/`, {
@@ -177,6 +180,7 @@
                         success: function(msg) {
                             console.log('set thumbnail')
                             textFieldEdit.insert(textBox,`[img]https://cdn2.scratch.mit.edu/get_image/project/${data["content-name"]}_9000x7200.png[/img]`)
+                            try{progresselement.remove()}catch{};
 
                             fetch(`https://scratch.mit.edu/site-api/projects/all/${data["content-name"]}/`, {
                                 "headers": {
