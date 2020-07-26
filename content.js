@@ -2,9 +2,9 @@
     'use strict';
     var toolbar = document.querySelector("#markItUpId_body > div > div.markItUpHeader > ul")
 
-    var uploadInput = document.createElement('input')
-
     var textBox = document.querySelector("#id_body")
+
+    var uploadInput = document.createElement('input')
 
     uploadInput.type = 'file'
 
@@ -21,7 +21,7 @@
             uploadImage(reader.result)
         }
         reader.onerror = err => {
-            alert("Could not read file.");
+            displayError("there was an error reading the file");
 	    throw err;
         }
     })
@@ -55,10 +55,18 @@
                 uploadImage(reader.result)
             }
             reader.onerror = err => {
-		alert("Could not read file.");
+		displayError("there was an error reading the file");
 		throw err;
             };
         })
+    }
+
+    function displayError(message){
+        var items = [{name: 'a cat', url:'https://cdn2.scratch.mit.edu/get_image/project/413649276_9000x7200.png'}, {name: 'a ufo cat', url:'https://cdn2.scratch.mit.edu/get_image/project/414016997_9000x7200.png'}]
+
+        var randObj = items[Math.floor(Math.random() * items.length)];
+        console.log(randObj)
+        textFieldEdit.insert(textBox,`your image could not be uploaded. ${message} here is ${randObj.name}. [img]${randObj.url}[/img]`);
     }
 
     function makeid(length) {
@@ -112,7 +120,7 @@
         window.progresselement = toolbar.appendChild(document.createElement("li"));
         progresselement.innerHTML = "getting authorization";
 
-        (k=>fetch("/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}}).catch(err=>{alert("Could not get authorization.");progresselement.remove();throw err;})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
+        (k=>fetch("/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}}).catch(err=>{displayError("could not get authorization. are you signed in?");progresselement.remove();throw err;})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
             
             progresselement.innerHTML = "creating project";
             
@@ -131,7 +139,7 @@
                 "method": "POST",
                 "mode": "cors",
                 "credentials": "include"
-            }).catch(err=>{alert("Could not create the project.");progresselement.remove();throw err;}).then(e=>e.json())
+            }).catch(err=>{displayError("error creating the project.");progresselement.remove();throw err;}).then(e=>e.json())
                 .then(data=>{
                 console.log(data)
 
@@ -155,7 +163,7 @@
                     "method": "PUT",
                     "mode": "cors",
                     "credentials": "omit"
-                }).catch(err=>{alert("Could not set project title. Delete the project manually.");progresselement.remove();throw err;}).then(thing=>{
+                }).catch(err=>{displayError("there was an error setting the project title.");progresselement.remove();throw err;}).then(thing=>{
                     console.log('changed title')
 
                     progresselement.innerHTML = "setting thumbnail";
@@ -180,7 +188,7 @@
                             return xhr;
                         },
                         error: function() {
-                            textFieldEdit.insert(textBox,`your image could not be added. perhaps try a smaller one. here is a cat. [img]https://cdn2.scratch.mit.edu/get_image/project/413649276_9000x7200.png[/img]`);
+                            displayError('perhaps try a smaller image.');
                             try{progresselement.remove()}catch{};
                             
                             //delete the project anyways
@@ -201,7 +209,7 @@
                                 "method": "PUT",
                                 "mode": "cors",
                                 "credentials": "include"
-                            }).catch(err=>{alert("Could not move the project to the trash folder. You should delete the project manually.");progresselement.remove();throw err;}).then(asdf=>{
+                            }).catch(err=>{displayError("we could not move the project to the trash folder. you should delete the project manually.");progresselement.remove();throw err;}).then(asdf=>{
                                 console.log('deleted project')
                             })
                         
@@ -230,7 +238,7 @@
                                 "method": "PUT",
                                 "mode": "cors",
                                 "credentials": "include"
-                            }).catch(err=>{alert("Could not move the project to the trash folder. You should delete the project manually.");progresselement.remove();throw err;}).then(asdf=>{
+                            }).catch(err=>{displayError("we could not move the project to the trash folder. you should delete the project manually.");progresselement.remove();throw err;}).then(asdf=>{
                                 console.log('deleted project')
                             })
                         },
