@@ -20,6 +20,10 @@
         reader.onloadend = function () {
             uploadImage(reader.result)
         }
+        reader.onerror = err => {
+            alert("Could not read file.");
+	    throw err;
+        }
     })
     
     uploadInput.style.display="none"
@@ -50,6 +54,10 @@
             reader.onloadend = function () {
                 uploadImage(reader.result)
             }
+            reader.onerror = err => {
+		alert("Could not read file.");
+		throw err;
+            };
         })
     }
 
@@ -104,7 +112,7 @@
         window.progresselement = toolbar.appendChild(document.createElement("li"));
         progresselement.innerHTML = "getting authorization";
 
-        (k=>fetch("/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
+        (k=>fetch("/session/",{credentials:"same-origin",headers:{"X-Requested-With":"XMLHttpRequest"}}).catch(err=>{alert("Could not get authorization.");progresselement.remove();throw err;})[k](p=>p.ok?p:Promise.reject(p.status))[k](p=>p.json())[k](j=>j.user.token)[k](token=>{
             
             progresselement.innerHTML = "creating project";
             
@@ -123,7 +131,7 @@
                 "method": "POST",
                 "mode": "cors",
                 "credentials": "include"
-            }).then(e=>e.json())
+            }).catch(err=>{alert("Could not create the project.");progresselement.remove();throw err;}).then(e=>e.json())
                 .then(data=>{
                 console.log(data)
 
@@ -147,7 +155,7 @@
                     "method": "PUT",
                     "mode": "cors",
                     "credentials": "omit"
-                }).then(thing=>{
+                }).catch(err=>{alert("Could not set project title. Delete the project manually.");progresselement.remove();throw err;}).then(thing=>{
                     console.log('changed title')
 
                     progresselement.innerHTML = "setting thumbnail";
@@ -193,7 +201,7 @@
                                 "method": "PUT",
                                 "mode": "cors",
                                 "credentials": "include"
-                            }).then(asdf=>{
+                            }).catch(err=>{alert("Could not move the project to the trash folder. You should delete the project manually.");progresselement.remove();throw err;}).then(asdf=>{
                                 console.log('deleted project')
                             })
                         
@@ -220,7 +228,7 @@
                                 "method": "PUT",
                                 "mode": "cors",
                                 "credentials": "include"
-                            }).then(asdf=>{
+                            }).catch(err=>{alert("Could not move the project to the trash folder. You should delete the project manually.");progresselement.remove();throw err;}).then(asdf=>{
                                 console.log('deleted project')
                             })
                         },
