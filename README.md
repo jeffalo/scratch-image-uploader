@@ -4,7 +4,7 @@ a chrome(ium) extension which allows image uploading directly through scratch
 [get it from the chrome webstore](https://chrome.google.com/webstore/detail/scratch-image-uploader/ofjfkbdgogigeclofnlgpbimaaohkjoo) or [install it using chrome's built in development mode for extensions](https://developer.chrome.com/extensions/getstarted)
 
 ## 📜 Usage as a userscript
-while not officially supported, you can also use it as a userscript and it should work fine. the browser extension is recommended though. only use this if you can't install browser extensions or you use a browser which is not yet supported. 
+while not officially supported (there might be random issues), you can also use it as a userscript and it should work fine. until a better solution for firefox support is done, this is the only way to use it on firefox.
 
 ```js
 // ==UserScript==
@@ -23,8 +23,6 @@ while not officially supported, you can also use it as a userscript and it shoul
 thanks to [@Boomer001](https://scratch.mit.edu/users/Boomer001/) for the conversion!
 
 ## 📝 TODO
-- fix on firefox
-
 - switch to using assets instead of project thumbnails (needs discussion)
 
 - add a menu for changing an image after it's been done. (needs design)
