@@ -62,7 +62,12 @@
     }
 
     function displayError(message){
-        var items = [{name: 'a cat', url:'https://cdn2.scratch.mit.edu/get_image/project/413649276_9000x7200.png'}, {name: 'a ufo cat', url:'https://cdn2.scratch.mit.edu/get_image/project/414016997_9000x7200.png'}]
+        var items = [
+            {name: 'a cat', url:'https://cdn2.scratch.mit.edu/get_image/project/413649276_9000x7200.png'},
+            {name: 'a ufo cat', url:'https://cdn2.scratch.mit.edu/get_image/project/414016997_9000x7200.png'},
+            {name: 'an alpaca', url:'https://cdn2.scratch.mit.edu/get_image/project/414018264_9000x7200.png'},
+            {name: 'appel',  url:'https://cdn2.scratch.mit.edu/get_image/project/414018433_9000x7200.png'}
+        ]
 
         var randObj = items[Math.floor(Math.random() * items.length)];
         console.log(randObj)
