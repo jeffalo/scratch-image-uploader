@@ -211,6 +211,8 @@
                             textFieldEdit.insert(textBox,`[img]https://cdn2.scratch.mit.edu/get_image/project/${data["content-name"]}_9000x7200.png[/img]`)
                             try{progresselement.remove()}catch{};
 
+                            uploadInput.value = null
+                            
                             fetch(`https://scratch.mit.edu/site-api/projects/all/${data["content-name"]}/`, {
                                 "headers": {
                                     "accept": "application/json, text/javascript, */*; q=0.01",
