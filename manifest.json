@@ -2,7 +2,7 @@
    "manifest_version": 2,
    "name": "Scratch Image Uploader",
    "description": "Use Scratch project thumbnails to upload images to be used on the forums.",
-   "version": "0.0.3",
+   "version": "0.0.4",
    "content_scripts": [
      {
        "matches": [
