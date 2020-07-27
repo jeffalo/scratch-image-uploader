@@ -42,10 +42,23 @@
                 }
             })
         })
-
+        textBox.addEventListener("dragenter",() => {
+            textBox.disabled = true;
+            textBox.style.backgroundColor = "lightgrey";
+        });
+        textBox.addEventListener("dragleave",() => {
+            textBox.disabled = false;
+            textBox.style.backgroundColor = "white";
+        });
+        textBox.addEventListener("dragend",() => {
+            textBox.disabled = false;
+            textBox.style.backgroundColor = "white";
+        });
         textBox.addEventListener('drop', e=>{
             e.preventDefault()
             e.stopPropagation()
+            textBox.disabled = false;
+            textBox.style.backgroundColor = "white";
 
             var reader = new FileReader()
 
