@@ -12,7 +12,7 @@ while not officially supported (there might be random issues), you can also use 
 // ==UserScript==
 // @name         Scratch Image Uploader
 // @namespace    https://jeffalo.net/
-// @version      0.0.4
+// @version      0.0.5
 // @updateURL    https://gist.github.com/JeffaloBob/9ad73b0728863f85832bb6703b6b7875/raw/scratch-image-uploader.user.js
 // @description  Use Scratch project thumbnails to upload images to be used on the forums.
 // @author       Jeffalo
