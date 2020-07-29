@@ -55,10 +55,13 @@
             textBox.style.backgroundColor = "white";
         });
         textBox.addEventListener('drop', e=>{
-            e.preventDefault()
-            e.stopPropagation()
             textBox.readonly = false;
             textBox.style.backgroundColor = "white";
+            if ("undefined" == typeof e.dataTransfer.files[0]) {
+                return;
+            };
+            e.preventDefault()
+            e.stopPropagation()
 
             var reader = new FileReader()
 
