@@ -1,3 +1,7 @@
+the standalone version is depricated (it will still work i just wont add any features to it), this repo should be used to dicuss/suggest features for the scratchaddons version of this.
+
+scratchaddons is super cool and has some really neat features for developers and users, check it out! https://github.com/ScratchAddons/ScratchAddons
+
 # 📁 scratch-image-uploader
 a chrome(ium) extension which allows image uploading directly through scratch 
 ## 💾 Installation
