@@ -1,6 +1,6 @@
-the standalone version is depricated (it will still work i just wont add any features to it), this repo should be used to dicuss/suggest features for the scratchaddons version of this.
+⚠ this extension is deprecated! check out the new fully featured extension over at [Scratch Addons](https://scratchaddons.com/). in Scratch Addons, it has been renamed to "Forum Image Uploader" 
 
-scratchaddons is super cool and has some really neat features for developers and users, check it out! https://github.com/ScratchAddons/ScratchAddons
+this repository remains as an archive, and to report bugs with the new version of the addon in Scratch Addons 
 
 # 📁 scratch-image-uploader
 a chrome(ium) extension which allows image uploading directly through scratch 
