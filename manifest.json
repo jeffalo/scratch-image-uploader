@@ -2,13 +2,13 @@
    "manifest_version": 2,
    "name": "Scratch Image Uploader",
    "description": "Use Scratch project thumbnails to upload images to be used on the forums.",
-   "version": "0.0.5",
+   "version": "0.0.6",
    "content_scripts": [
      {
        "matches": [
          "https://scratch.mit.edu/discuss/*"
        ],
-       "js": ["jquery.js","content.js", "text-field-edit.js"]
+       "js": ["jquery.js","content.js", "text-field-edit.js", "md5.js"]
      }
    ],
    "icons": {
